@@ -1,4 +1,9 @@
+#!/usr/bin/python3
+"""This module contains the function minOperations"""
+
+
 def minOperations(n):
+    """this functions calculates the minimun number of operations"""
     if n == 1:
         return 0
     i = 2
