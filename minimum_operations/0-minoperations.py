@@ -16,5 +16,3 @@ def minOperations(n):
     if n > 1:
         steps += n
     return steps
-
-
