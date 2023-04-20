@@ -1,35 +1,40 @@
-#include "sandpiles.h"
-#include <stdbool.h>
 #include <stdio.h>
-
+#include "sandpiles.h"
 
 /**
- * topple - Topple a cell in the grid if it has more than 3 grains
- * @grid: Grid to topple in
- * @i: Row index of the cell to topple
- * @j: Column index of the cell to topple
+ * print_grid - Print a 3x3 grid
+ * @grid: Grid to be printed
+ *
+ * Return: void
  */
-static void topple(int grid[3][3], int i, int j)
+static void print_grid(int grid[3][3])
 {
-    grid[i][j] -= 4;
-    if (i > 0)
-        grid[i - 1][j]++;
-    if (i < 2)
-        grid[i + 1][j]++;
-    if (j > 0)
-        grid[i][j - 1]++;
-    if (j < 2)
-        grid[i][j + 1]++;
+    int i, j;
+
+    printf("=\n");
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            if (j)
+                printf(" ");
+            printf("%d", grid[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 /**
- * sandpiles_sum - Compute the sum of two sandpiles and store the result in the first grid
- * @grid1: First sandpile grid
- * @grid2: Second sandpile grid
+ * sanpiles_sum - Add two sandpiles
+ * @grid1: First sandpile
+ * @grid2: Second sandpile
+ *
+ * Return: void
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
-    int i, j;
+    int i, j, unstable;
+    int tmp[3][3];
 
     for (i = 0; i < 3; i++)
     {
@@ -38,22 +43,49 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
             grid1[i][j] += grid2[i][j];
         }
     }
-
-    bool unstable = true;
-    while (unstable)
-    {
-        unstable = false;
+	print_grid(grid1);
+    do {
+        unstable = 0;
 
         for (i = 0; i < 3; i++)
         {
             for (j = 0; j < 3; j++)
             {
-                if (grid1[i][j] > 3)
+                tmp[i][j] = grid1[i][j];
+            }
+        }
+
+        for (i = 0; i < 3; i++)
+        {
+            for (j = 0; j < 3; j++)
+            {
+                if (tmp[i][j] > 3)
                 {
-                    topple(grid1, i, j);
-                    unstable = true;
+                    unstable = 1;
                 }
             }
         }
-   }
+	
+	if (unstable)
+		print_grid(grid1);
+
+        for (i = 0; i < 3; i++)
+        {
+            for (j = 0; j < 3; j++)
+            {
+                if (tmp[i][j] > 3)
+                {
+                    grid1[i][j] -= 4;
+                    if (i > 0)
+                        grid1[i - 1][j] += 1;
+                    if (i < 2)
+                        grid1[i + 1][j] += 1;
+                    if (j > 0)
+                        grid1[i][j - 1] += 1;
+                    if (j < 2)
+                        grid1[i][j + 1] += 1;
+                }
+            }
+        }
+    } while (unstable);
 }
