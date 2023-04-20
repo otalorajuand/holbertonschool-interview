@@ -29,25 +29,24 @@ static void topple(int grid[3][3], int i, int j)
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
-    // Add the two grids together
-    for (int i = 0; i < 3; i++)
+    int i, j;
+
+    for (i = 0; i < 3; i++)
     {
-        for (int j = 0; j < 3; j++)
+        for (j = 0; j < 3; j++)
         {
             grid1[i][j] += grid2[i][j];
         }
     }
 
-    // Topple cells until the grid is stable
     bool unstable = true;
     while (unstable)
     {
         unstable = false;
 
-        // Check each cell for instability and topple if necessary
-        for (int i = 0; i < 3; i++)
+        for (i = 0; i < 3; i++)
         {
-            for (int j = 0; j < 3; j++)
+            for (j = 0; j < 3; j++)
             {
                 if (grid1[i][j] > 3)
                 {
