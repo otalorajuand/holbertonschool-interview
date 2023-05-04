@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+"""This module prints stats"""
 import sys
+
 
 
 line_counter = 0
