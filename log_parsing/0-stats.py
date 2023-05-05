@@ -36,5 +36,6 @@ try:
         if line_counter != 0 and line_counter % 10 == 0:
             print_stats(total_file_size, status_codes)
         line_counter += 1
+    print_stats(total_file_size, status_codes)
 except KeyboardInterrupt:
     print_stats(total_file_size, status_codes)
