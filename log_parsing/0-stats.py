@@ -3,15 +3,6 @@
 import sys
 
 
-def print_stats(total_file_size, dic):
-    """Prints the stats"""
-    print("File size: {}".format(total_file_size))
-    for k in sorted(dic):
-        if dic[k] != 0:
-            print("{}: {}".format(k, dic[k]))
-
-
-
 line_counter = 0
 total_file_size = 0
 status_codes = {'200': 0,
@@ -23,6 +14,12 @@ status_codes = {'200': 0,
                 '405': 0,
                 '500': 0}
 
+def print_stats(total_file_size, dic):
+    """Prints the stats"""
+    print("File size: {}".format(total_file_size))
+    for k in sorted(dic):
+        if dic[k] != 0:
+            print("{}: {}".format(k, dic[k]))
 try: 
     for line in sys.stdin:
 
