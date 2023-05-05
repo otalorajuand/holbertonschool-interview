@@ -32,7 +32,7 @@ try:
         line = line.rstrip()
 
         line_list = line.split(" ")
-        if len(line_list) < 8:
+        if len(line_list) < 2:
             continue
         status_code = line_list[-2]
 
