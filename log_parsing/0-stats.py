@@ -32,7 +32,9 @@ try:
         line = line.rstrip()
 
         line_list = line.split(" ")
-        status_code = str(line_list[7])
+        if len(line_list) < 8:
+            break
+        status_code = line_list[7]
 
         if status_code in status_codes.keys():
             status_codes[status_code] += 1
