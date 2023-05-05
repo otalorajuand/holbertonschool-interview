@@ -18,7 +18,8 @@ status_codes = {'200': 0,
 def print_stats(total_file_size, dic):
     print("File size: {}".format(total_file_size))
     for k, v in dic.items():
-        print(k, v)
+        if v != 0:
+            print(k, v)
 
 try: 
     for line in sys.stdin:
