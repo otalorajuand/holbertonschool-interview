@@ -33,7 +33,7 @@ try:
 
         line_list = line.split(" ")
         if len(line_list) < 8:
-            break
+            continue
         status_code = line_list[7]
 
         if status_code in status_codes.keys():
