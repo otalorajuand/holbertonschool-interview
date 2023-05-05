@@ -19,7 +19,7 @@ def print_stats(total_file_size, dic):
     print("File size: {}".format(total_file_size))
     for k in sorted(dic):
         if dic[k] != 0:
-            print(k, dic[k])
+            print("{}: {}".format(k, dic[k]))
 
 try: 
     for line in sys.stdin:
