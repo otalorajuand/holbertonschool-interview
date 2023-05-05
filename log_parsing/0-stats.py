@@ -34,12 +34,12 @@ try:
         line_list = line.split(" ")
         if len(line_list) < 8:
             continue
-        status_code = line_list[7]
+        status_code = line_list[-2]
 
         if status_code in status_codes.keys():
             status_codes[status_code] += 1
 
-        file_size = int(line_list[8])
+        file_size = int(line_list[-1])
         total_file_size += file_size
 
         line_counter += 1
