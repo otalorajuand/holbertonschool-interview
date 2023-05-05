@@ -4,6 +4,7 @@ import sys
 
 
 def print_stats(total_file_size, dic):
+    """Prints the stats"""
     print("File size: {}".format(total_file_size))
     for k in sorted(dic):
         if dic[k] != 0:
