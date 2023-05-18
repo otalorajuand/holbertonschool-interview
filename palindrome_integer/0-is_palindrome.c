@@ -32,7 +32,6 @@ int is_palindrome(unsigned long n)
 {
     int count = 0, den;
     unsigned long aux = n, first, last;
-    //int last, first;
 
     while (aux != 0)
     {
