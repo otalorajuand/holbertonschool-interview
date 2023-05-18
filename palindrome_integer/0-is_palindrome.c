@@ -43,7 +43,8 @@ int is_palindrome(unsigned long n)
 
     first = count%2 == 0 ? n/den : n/(den * 10);
 
-    last = reverse_number(n%den);
+    first = reverse_number(first);
+    last = n%den;
 
     if (first == last)
         return (1);
