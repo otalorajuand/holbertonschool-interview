@@ -8,13 +8,9 @@
  */
 static void merge_left(int *line, size_t size)
 {
-    size_t i, j;
-    int merged[size];
+    int merged[LINE_SIZE] = {0};
+    size_t i, j = 0;
 
-    for (i = 0; i < size; i++)
-        merged[i] = 0;
-
-    j = 0;
     for (i = 0; i < size; i++)
     {
         if (line[i] != 0)
@@ -43,13 +39,9 @@ static void merge_left(int *line, size_t size)
  */
 static void merge_right(int *line, size_t size)
 {
-    size_t i, j;
-    int merged[size];
+    int merged[LINE_SIZE] = {0};
+    size_t i, j = size - 1;
 
-    for (i = 0; i < size; i++)
-        merged[i] = 0;
-
-    j = size - 1;
     for (i = size - 1; i < size; i--)
     {
         if (line[i] != 0)
