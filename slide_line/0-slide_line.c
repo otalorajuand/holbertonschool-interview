@@ -3,125 +3,81 @@
 #include <stdio.h>
 
 /**
- * slide_line - Slides and merges an array of integers in the specified direction.
+ * merge_left - Merges the elements of an array towards the left
  *
- * @line: Pointer to the array of integers.
- * @size: Number of elements in the array.
- * @direction: Direction to slide and merge (SLIDE_LEFT or SLIDE_RIGHT).
+ * @line: Pointer to the array of integers
+ * @size: Number of elements in @line
+ */
+static void merge_left(int *line, size_t size)
+{
+    size_t i, j;
+
+    for (i = 0; i < size - 1; i++)
+    {
+        if (line[i] == line[i + 1])
+        {
+            line[i] *= 2;
+            line[i + 1] = 0;
+        }
+    }
+
+    for (i = 0, j = 0; i < size; i++)
+    {
+        if (line[i] != 0)
+            line[j++] = line[i];
+    }
+
+    for (; j < size; j++)
+        line[j] = 0;
+}
+
+/**
+ * merge_right - Merges the elements of an array towards the right
  *
- * Return: 1 upon success, or 0 upon failure.
+ * @line: Pointer to the array of integers
+ * @size: Number of elements in @line
+ */
+static void merge_right(int *line, size_t size)
+{
+    size_t i, j;
+
+    for (i = size - 1; i > 0; i--)
+    {
+        if (line[i] == line[i - 1])
+        {
+            line[i] *= 2;
+            line[i - 1] = 0;
+        }
+    }
+
+    for (i = size - 1, j = size - 1; i > 0; i--)
+    {
+        if (line[i] != 0)
+            line[j--] = line[i];
+    }
+
+    for (; j > 0; j--)
+        line[j] = 0;
+}
+
+/**
+ * slide_line - Slides and merges an array of integers
+ *
+ * @line: Pointer to the array of integers
+ * @size: Number of elements in @line
+ * @direction: Direction of the slide (SLIDE_LEFT or SLIDE_RIGHT)
+ *
+ * Return: 1 upon success, or 0 upon failure
  */
 int slide_line(int *line, size_t size, int direction)
 {
-    int *current, *end, *stop;
-    int merged = 0;
-
     if (line == NULL || (direction != SLIDE_LEFT && direction != SLIDE_RIGHT))
         return 0;
 
     if (direction == SLIDE_LEFT)
-    {
-        current = line;
-        stop = line + size;
-        end = current + 1;
-
-        while (current < stop)
-        {
-            if (*current == 0)
-            {
-                current++;
-                continue;
-            }
-
-            if (*end == *current)
-            {
-                *current *= 2;
-                *end = 0;
-                merged = 1;
-            }
-
-            current++;
-            end++;
-        }
-    }
+        merge_left(line, size);
     else if (direction == SLIDE_RIGHT)
-    {
-        current = line + size - 1;
-        stop = line - 1;
-        end = current - 1;
-
-        while (current > stop)
-        {
-            if (*current == 0)
-            {
-                current--;
-                continue;
-            }
-
-            if (*end == *current)
-            {
-                *current *= 2;
-                *end = 0;
-                merged = 1;
-            }
-
-            current--;
-            end--;
-        }
-    }
-
-    if (merged)
-    {
-        if (direction == SLIDE_LEFT)
-        {
-            current = line;
-            end = current + 1;
-
-            while (current < stop)
-            {
-                if (*current == 0)
-                {
-                    while (end < stop && *end == 0)
-                        end++;
-
-                    if (end < stop)
-                    {
-                        *current = *end;
-                        *end = 0;
-                        merged = 1;
-                    }
-                }
-
-                current++;
-                end++;
-            }
-        }
-        else if (direction == SLIDE_RIGHT)
-        {
-            current = line + size - 1;
-            stop = line - 1;
-            end = current - 1;
-
-            while (current > stop)
-            {
-                if (*current == 0)
-                {
-                    while (end > stop && *end == 0)
-                        end--;
-
-                    if (end > stop)
-                    {
-                        *current = *end;
-                        *end = 0;
-                        merged = 1;
-                    }
-                }
-
-                current--;
-                end--;
-            }
-        }
-    }
+        merge_right(line, size);
 
     return 1;
 }
