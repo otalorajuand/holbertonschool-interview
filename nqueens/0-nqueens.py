@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import sys
 
+
 def is_safe(board, row, col):
     # Check if there is a queen in the same column
     for i in range(row):
@@ -25,6 +26,7 @@ def is_safe(board, row, col):
 
     return True
 
+
 def solve_nqueens(board, row):
     # Base case: all queens have been placed
     if row == len(board):
@@ -41,6 +43,7 @@ def solve_nqueens(board, row):
 
             board[row][col] = 0  # Backtrack and remove the queen
 
+
 def print_solution(board):
     solution = []
     for i in range(len(board)):
@@ -49,12 +52,14 @@ def print_solution(board):
                 solution.append([i, j])
     print(solution)
 
+
 def nqueens(n):
     # Create an empty chessboard
     board = [[0 for _ in range(n)] for _ in range(n)]
 
     # Start solving the N queens problem
     solve_nqueens(board, 0)
+
 
 if __name__ == '__main__':
     # Check if the correct number of arguments is provided
