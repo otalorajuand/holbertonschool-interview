@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include "binary_trees.h"
 
+/* Function prototype */
+avl_t *create_avl_tree(int *array, int start, int end, avl_t *parent);
+
 /**
  * sorted_array_to_avl - Builds an AVL tree from a sorted array
  * @array: Pointer to the first element of the array
