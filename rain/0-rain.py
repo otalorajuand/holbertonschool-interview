@@ -4,28 +4,33 @@
 
 def rain(walls):
     """
-    Given a list of non-negative integers representing the heights of walls
-    with unit width 1, as if viewing the cross-section of a relief map,
-    calculate how many square units of water will be retained after it rains.
-
-    Params:
-        walls is a list of non-negative integers.
-
-    Return: Integer indicating total amount of rainwater retained.
+    Calculate the total amount of rainwater retained after it rains.
+    Args:
+        walls: List of non-negative integers representing the heights of walls.
+    Returns:
+        Integer indicating the total amount of rainwater retained.
     """
+    n = len(walls)
+    if n < 3:
+        return 0
 
-    flag1, flag2, rain = 0, 0, 0
+    total_water = 0
+    left_max = [0] * n
+    right_max = [0] * n
 
-    for elem in walls:
+    # Calculate the left maximum heights
+    left_max[0] = walls[0]
+    for i in range(1, n):
+        left_max[i] = max(left_max[i - 1], walls[i])
 
-        if flag1 != 0 and elem != 0:
-            flag2 = elem
+    # Calculate the right maximum heights
+    right_max[n - 1] = walls[n - 1]
+    for i in range(n - 2, -1, -1):
+        right_max[i] = max(right_max[i + 1], walls[i])
 
-        if elem != 0 and flag2 == 0:
-            flag1 = elem
+    # Calculate the retained water at each position
+    for i in range(n):
+        effective_height = min(left_max[i], right_max[i])
+        total_water += effective_height - walls[i]
 
-        if flag2 != 0:
-            rain += flag1
-            flag1, flag2 = elem, 0
-
-    return rain
+    return total_water
