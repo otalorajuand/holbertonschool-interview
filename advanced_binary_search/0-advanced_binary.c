@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "search_algos.h"
+#include <search_algos.h>
 
 int recursive_advanced_binary(int *array, int low, int high, int value);
 
@@ -25,25 +25,27 @@ int recursive_advanced_binary(int *array, int low, int high, int value)
 {
     int mid, result;
 
-    if (low > high)
-        return -1;
-
-    mid = (low + high) / 2;
-    result = array[mid];
-
-    if (result == value)
+    if (low <= high)
     {
-        if (mid == low || array[mid - 1] != value)
-            return mid;
+        mid = (low + high) / 2;
+        result = array[mid];
+
+        if (result == value)
+        {
+            if (mid == low || array[mid - 1] != value)
+                return mid;
+            else
+                return recursive_advanced_binary(array, low, mid, value);
+        }
+        else if (result > value)
+        {
+            return recursive_advanced_binary(array, low, mid, value);
+        }
         else
-            return recursive_advanced_binary(array, low, mid - 1, value);
+        {
+            return recursive_advanced_binary(array, mid + 1, high, value);
+        }
     }
-    else if (result > value)
-    {
-        return recursive_advanced_binary(array, low, mid - 1, value);
-    }
-    else
-    {
-        return recursive_advanced_binary(array, mid + 1, high, value);
-    }
+
+    return -1;
 }
