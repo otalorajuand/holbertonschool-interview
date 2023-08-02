@@ -3,6 +3,7 @@
 #include "search_algos.h"
 
 int recursive_advanced_binary(int *array, int low, int high, int value);
+void print_array(int *array, int start, int end);
 
 /**
  * advanced_binary - Searches for a value in a sorted array of integers.
@@ -27,6 +28,7 @@ int recursive_advanced_binary(int *array, int low, int high, int value)
 
     if (low <= high)
     {
+        print_array(array, low, high); // Print the array being searched
         mid = (low + high) / 2;
         result = array[mid];
 
@@ -48,4 +50,18 @@ int recursive_advanced_binary(int *array, int low, int high, int value)
     }
 
     return -1;
+}
+
+void print_array(int *array, int start, int end)
+{
+    int i;
+
+    printf("Searching in array:");
+    for (i = start; i <= end; i++)
+    {
+        printf(" %d", array[i]);
+        if (i < end)
+            printf(",");
+    }
+    printf("\n");
 }
