@@ -28,7 +28,7 @@ int recursive_advanced_binary(int *array, int low, int high, int value)
 
     if (low <= high)
     {
-        print_array(array, low, high); // Print the array being searched
+        print_array(array, low, high); 
         mid = (low + high) / 2;
         result = array[mid];
 
