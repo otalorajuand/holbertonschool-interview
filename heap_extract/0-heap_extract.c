@@ -44,13 +44,15 @@ void heapify_down(heap_t *root)
  */
 int heap_extract(heap_t **root)
 {
+    int extracted_value;
+    heap_t *last_node;
+
     if (*root == NULL)
         return 0;
 
-    int extracted_value;
     extracted_value = (*root)->n;
 
-    heap_t *last_node = *root;
+    last_node = *root;
     while (last_node->right != NULL)
     {
         if (last_node->right != NULL)
