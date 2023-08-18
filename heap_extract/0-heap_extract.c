@@ -47,9 +47,9 @@ int heap_extract(heap_t **root)
     if (*root == NULL)
         return 0;
 
-    int extracted_value = (*root)->n;
+    int extracted_value;
+    extracted_value = (*root)->n;
 
-    // Find the last node of the heap
     heap_t *last_node = *root;
     while (last_node->right != NULL)
     {
@@ -66,10 +66,8 @@ int heap_extract(heap_t **root)
         }
     }
 
-    // Replace root's value with last node's value
     (*root)->n = last_node->n;
 
-    // Remove the last node
     if (last_node->parent->right != NULL)
         last_node->parent->right = NULL;
     else
@@ -77,7 +75,6 @@ int heap_extract(heap_t **root)
 
     free(last_node);
 
-    // Rebuild the heap
     heapify_down(*root);
 
     return extracted_value;
