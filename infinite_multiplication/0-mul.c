@@ -7,7 +7,7 @@ void print_error() {
 }
 
 int main(int argc, char *argv[]) {
-    unsigned long num1, num2;
+    unsigned long num1, num2, result;
     int i;
 
     if (argc != 3) {
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     num2 = strtoul(argv[2], NULL, 10);
 
 
-    unsigned long result = num1 * num2;
+    result = num1 * num2;
 
 
     printf("%lu\n", result);
