@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>  // Include the header for isdigit function
 
 void print_error() {
     printf("Error\n");
@@ -8,31 +7,33 @@ void print_error() {
 }
 
 int main(int argc, char *argv[]) {
+    int i;
+
     if (argc != 3) {
         print_error();
     }
 
     // Check if num1 and num2 are composed of digits
-    for (int i = 0; argv[1][i] != '\0'; i++) {
-        if (!isdigit((unsigned char)argv[1][i])) {  // Cast to unsigned char for isdigit
+    for (i = 0; argv[1][i] != '\0'; i++) {
+        if (argv[1][i] < '0' || argv[1][i] > '9') {
             print_error();
         }
     }
-    for (int i = 0; argv[2][i] != '\0'; i++) {
-        if (!isdigit((unsigned char)argv[2][i])) {  // Cast to unsigned char for isdigit
+    for (i = 0; argv[2][i] != '\0'; i++) {
+        if (argv[2][i] < '0' || argv[2][i] > '9') {
             print_error();
         }
     }
 
     // Convert num1 and num2 to integers
-    unsigned long long num1 = strtoull(argv[1], NULL, 10);
-    unsigned long long num2 = strtoull(argv[2], NULL, 10);
+    unsigned long num1 = strtoul(argv[1], NULL, 10);
+    unsigned long num2 = strtoul(argv[2], NULL, 10);
 
     // Perform multiplication
-    unsigned long long result = num1 * num2;
+    unsigned long result = num1 * num2;
 
     // Print the result
-    printf("%llu\n", result);
+    printf("%lu\n", result);
 
     return 0;
 }
