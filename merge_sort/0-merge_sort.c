@@ -69,14 +69,15 @@ void merge(int *array, int *left, int left_size, int *right, int right_size)
  */
 void merge_sort_recursive(int *array, size_t size)
 {
-    if (size <= 1)
-        return;
 
     int mid;
     int *left;
     int *right;
     int left_size;
     int right_size;
+
+    if (size <= 1)
+        return;
 
     mid = size / 2;
     left = array;
