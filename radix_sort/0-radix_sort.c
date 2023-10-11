@@ -12,7 +12,7 @@
  *
  * Return: The maximum element in the array
  */
-int getMax(int *array, size_t size) 
+int getMax(int *array, size_t size)
 {
     int max = array[0];
     size_t i;
