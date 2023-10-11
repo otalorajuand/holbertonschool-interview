@@ -44,13 +44,14 @@ void countSort(int *array, size_t size, int exp) {
 } 
 
 void radix_sort(int *array, size_t size) {
-    if (array == NULL || size < 2) {
-        return;
-    }
 
     int max;
     int exp;
     size_t i;
+
+    if (array == NULL || size < 2) {
+        return;
+    }
 
     max = getMax(array, size);
 
