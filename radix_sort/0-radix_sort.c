@@ -53,7 +53,7 @@ void radix_sort(int *array, size_t size) {
     size_t i;
 
     for (exp = 1; max / exp > 0; exp *= 10) {
-        for (i = 0; i < size; i++) { // Move the loop variable declaration here
+        for (i = 0; i < size; i++) {
             print_array(array, size);
         }
         countSort(array, size, exp);
