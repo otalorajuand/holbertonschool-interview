@@ -21,9 +21,12 @@ int compare_words(char const **arr, int n, char const *substr)
         if (cmp == 0)
         {
             substr += len;
-            continue;
+            arr++;
         }
-        return (0);
+        else
+        {
+            return (0);
+        }
     }
     return (1);
 }
@@ -38,7 +41,7 @@ int compare_words(char const **arr, int n, char const *substr)
  */
 int *find_substring(char const *s, char const **words, int nb_words, int *n)
 {
-    int len_s, len_word, total_len, count, i, j, k;
+    int len_s, len_word, total_len, count, i, j;
     int *indices, *matches;
 
     if (!s || !words || !*words || nb_words == 0)
@@ -63,22 +66,19 @@ int *find_substring(char const *s, char const **words, int nb_words, int *n)
         count = 0;
         for (j = 0; j < nb_words; j++)
         {
-            for (k = 0; k < len_s; k += len_word)
+            if (compare_words(words, nb_words, s + i + (j * len_word)))
             {
-                if (matches[k / len_word])
-                    continue;
-
-                if (compare_words(words, nb_words, s + i + k))
-                {
-                    matches[k / len_word] = 1;
-                    count++;
-                    break;
-                }
+                matches[j] = 1;
+                count++;
+            }
+            else
+            {
+                break;
             }
         }
 
         if (count == nb_words)
-            indices[*n] = i, (*n)++;
+            indices[(*n)++] = i;
 
         free(matches);
     }
